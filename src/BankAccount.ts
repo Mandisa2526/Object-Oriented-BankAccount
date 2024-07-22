@@ -1,41 +1,28 @@
 export class BankAccount {
+    // Private balance property
     private balance: number;
 
-    constructor(
-        public accountNumber: string,
-        public holderName: string,
-        initialBalance: number = 0.0,
-        public accountType: string = 'Checking'
-    ) {
-        this.balance = initialBalance;
+    // Constructor to initialize the balance
+    constructor(balance: number) {
+        this.balance = balance;
     }
 
-    deposit(amount: number): void {
-        if (amount > 0) {
-            this.balance += amount;
-        } else {
-            throw new Error("Deposit amount must be positive.");
-        }
-    }
-
-    withdraw(amount: number): void {
-        if (amount > 0 && amount <= this.balance) {
-            this.balance -= amount;
-        } else {
-            throw new Error("Insufficient funds or invalid amount.");
-        }
-    }
-
-    checkBalance(): number {
+    // Method to get the balance
+    public getBalance(): number {
         return this.balance;
     }
 
-    transfer(amount: number, otherAccount: BankAccount): void {
-        if (amount > 0 && amount <= this.balance) {
+    // Method to deposit an amount
+    public deposit(amount: number): void {
+        this.balance += amount;
+    }
+
+    // Method to withdraw an amount
+    public withdraw(amount: number): boolean {
+        if (this.balance >= amount) {
             this.balance -= amount;
-            otherAccount.deposit(amount);
-        } else {
-            throw new Error("Insufficient funds or invalid amount.");
+            return true;
         }
+        return false;
     }
 }
