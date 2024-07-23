@@ -1,23 +1,24 @@
 export class BankAccount {
-    // Private balance property
     private balance: number;
+    private accountNumber: string;
 
-    // Constructor to initialize the balance
-    constructor(balance: number) {
+    constructor(accountNumber: string, holderName: string, balance: number = 0) {
+        this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-    // Method to get the balance
     public getBalance(): number {
         return this.balance;
     }
 
-    // Method to deposit an amount
+    public getAccountNumber(): string {
+        return this.accountNumber;
+    }
+
     public deposit(amount: number): void {
         this.balance += amount;
     }
 
-    // Method to withdraw an amount
     public withdraw(amount: number): boolean {
         if (this.balance >= amount) {
             this.balance -= amount;
@@ -25,4 +26,13 @@ export class BankAccount {
         }
         return false;
     }
+
+    public transfer(amount: number, targetAccount: BankAccount): boolean {
+        if (this.withdraw(amount)) {
+            targetAccount.deposit(amount);
+            return true;
+        }
+        return false;
+    }
 }
+                             
