@@ -5,7 +5,7 @@ describe('BankAccount', function() {
     let account: BankAccount;
 
     beforeEach(function() {
-        account = new BankAccount('123456', 'Alice', 1000);
+        account = new BankAccount('Alice', 1000);
     });
 
     it('should initialize with correct balance', function() {
@@ -30,7 +30,7 @@ describe('BankAccount', function() {
     });
 
     it('should transfer funds correctly if balance is sufficient', function() {
-        const targetAccount = new BankAccount('654321', 'Bob', 500);
+        const targetAccount = new BankAccount('Bob', 500);
         const success = account.transfer(300, targetAccount);
         assert.equal(success, true);
         assert.equal(account.getBalance(), 700);
@@ -38,7 +38,7 @@ describe('BankAccount', function() {
     });
 
     it('should not transfer funds if balance is insufficient', function() {
-        const targetAccount = new BankAccount('654321', 'Bob', 500);
+        const targetAccount = new BankAccount( 'Bob', 500);
         const success = account.transfer(1200, targetAccount);
         assert.equal(success, false);
         assert.equal(account.getBalance(), 1000);

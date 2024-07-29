@@ -1,21 +1,24 @@
 import { BankAccount } from './BankAccount';
 
 export class Bank {
+    // accounts is a Map that associates account numbers (string) with BankAccount instances. 
     private accounts: Map<string, BankAccount>;
 
     constructor() {
+        //  initializes a new Map to store the bank accounts.
         this.accounts = new Map<string, BankAccount>();
     }
-
+    // Adds a new BankAccount to the accounts map
     public addAccount(account: BankAccount): void {
         this.accounts.set(account.getAccountNumber(), account);
     }
-
+//  Retrieves a BankAccount instance by its account number.
+//Returns undefined if no account is found with the provided number
     public getAccount(accountNumber: string): BankAccount | undefined {
         return this.accounts.get(accountNumber);
     }
 
-    public depositToAccount(accountNumber: string, amount: number): boolean {
+    public deposit(accountNumber: string, amount: number): boolean {
         const account = this.getAccount(accountNumber);
         if (account) {
             account.deposit(amount);
@@ -24,7 +27,7 @@ export class Bank {
         return false;
     }
 
-    public withdrawFromAccount(accountNumber: string, amount: number): boolean {
+    public withdraw(accountNumber: string, amount: number): boolean {
         const account = this.getAccount(accountNumber);
         if (account) {
             return account.withdraw(amount);
@@ -32,7 +35,7 @@ export class Bank {
         return false;
     }
 
-    public transferBetweenAccounts(
+    public transfer(
         fromAccountNumber: string,
         toAccountNumber: string,
         amount: number
