@@ -14,7 +14,7 @@ export class BankAccount {
         return this.balance;
     }
     // Returns the account number
-    public getAccountNumber(): string {
+    public getAccountNumber(): string { 
         return this.accountNumber;  
     }
 // Increases the balance by the specified amount
