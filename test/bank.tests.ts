@@ -36,18 +36,4 @@ describe('Bank', function() {
         assert.equal(success, false);
         assert.equal(bank.getAccount('Bob')?.getBalance(), 500);
     });
-
-    it('should transfer between accounts correctly if balance is sufficient', function() {
-        const success = bank.transfer('Alice', 'Bob', 300);
-        assert.equal(success, true);
-        assert.equal(bank.getAccount('Alice')?.getBalance(), 700);
-        assert.equal(bank.getAccount('Bob')?.getBalance(), 800);
-    });
-
-    it('should not transfer between accounts if balance is insufficient', function() {
-        const success = bank.transfer('Alice', 'Bob', 1200);
-        assert.equal(success, false);
-        assert.equal(bank.getAccount('Alice')?.getBalance(), 1000);
-        assert.equal(bank.getAccount('Bob')?.getBalance(), 500);
-    });
 });

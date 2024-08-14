@@ -1,4 +1,5 @@
 import { BankAccount } from './BankAccount';
+import { TransferResult } from './transferResult';
 
 export class Bank {
     // accounts is a Map that associates account numbers (string) with BankAccount instances. 
@@ -43,7 +44,8 @@ export class Bank {
         const fromAccount = this.getAccount(fromAccountNumber);
         const toAccount = this.getAccount(toAccountNumber);
         if (fromAccount && toAccount) {
-            return fromAccount.transfer(amount, toAccount);
+            const transferResult: TransferResult = fromAccount.transfer(amount, toAccount);
+            return transferResult.success;  // Use the success property to return a boolean
         }
         return false;
     }

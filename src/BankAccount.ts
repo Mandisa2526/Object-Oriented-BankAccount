@@ -1,3 +1,5 @@
+import { TransferResult } from "./transferResult";
+
 export class BankAccount {
     // balance stores the amount of money in the bank account.
     private balance: number;
@@ -30,14 +32,20 @@ export class BankAccount {
         }
         return false;
     }
-//   Transfers the specified amount from this account to the targetAccount
-    public transfer(amount: number, targetAccount: BankAccount): boolean {
-        // attempts to withdraw the amount from this account. If successful, it deposits the amount into the targetAccount
+
+    public transfer(amount: number, targetAccount: BankAccount): TransferResult {
+        if (amount <= 0) {
+            return new TransferResult(false, "Transfer amount must be greater than zero.");
+        }
+
         if (this.withdraw(amount)) {
             targetAccount.deposit(amount);
-            return true;
+            return new TransferResult(true, "Transfer successful.");
+        } else {
+            return new TransferResult(false, "Insufficient funds for transfer.");
         }
-        return false;
     }
 }
+
+
                              
